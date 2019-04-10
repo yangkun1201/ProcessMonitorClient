@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="ProcessMonitor">
+    <file>Resources/monitor.png</file>
+  </qresource>
+</RCC>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ProcessMonitorClass</class>
+ <widget class="QMainWindow" name="ProcessMonitorClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>597</width>
+    <height>381</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ProcessMonitor</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QtCharts::QChartView" name="widget" native="true"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>597</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>菜单</string>
+    </property>
+    <addaction name="regist_btn"/>
+    <addaction name="separator"/>
+    <addaction name="showOnBrowser"/>
+    <addaction name="separator"/>
+    <addaction name="sendToHost_btn"/>
+    <addaction name="separator"/>
+    <addaction name="logout_btn"/>
+    <addaction name="separator"/>
+    <addaction name="action_exit"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>设置</string>
+    </property>
+    <addaction name="action_setup"/>
+    <addaction name="separator"/>
+    <addaction name="test_btn"/>
+    <addaction name="separator"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+  </widget>
+  <action name="action_open">
+   <property name="text">
+    <string>打开</string>
+   </property>
+  </action>
+  <action name="action_exit">
+   <property name="text">
+    <string>退出</string>
+   </property>
+  </action>
+  <action name="test_btn">
+   <property name="text">
+    <string>test</string>
+   </property>
+  </action>
+  <action name="monitor">
+   <property name="text">
+    <string>监控</string>
+   </property>
+  </action>
+  <action name="regist_btn">
+   <property name="text">
+    <string>注册</string>
+   </property>
+  </action>
+  <action name="login_btn">
+   <property name="text">
+    <string>登录</string>
+   </property>
+  </action>
+  <action name="showOnBrowser">
+   <property name="text">
+    <string>查看用时</string>
+   </property>
+  </action>
+  <action name="sendToHost_btn">
+   <property name="text">
+    <string>发送到服务器</string>
+   </property>
+  </action>
+  <action name="test_btn_2">
+   <property name="text">
+    <string>测试</string>
+   </property>
+  </action>
+  <action name="action_setup">
+   <property name="text">
+    <string>修改监控软件</string>
+   </property>
+  </action>
+  <action name="logout_btn">
+   <property name="text">
+    <string>注销</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QtCharts::QChartView</class>
+   <extends>QWidget</extends>
+   <header>qchartview.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
