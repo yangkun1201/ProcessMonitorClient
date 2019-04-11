@@ -166,9 +166,9 @@ void ProcessMonitor::replayFinished(QNetworkReply *reply)
 			MessageBox(NULL, L"登录成功", L"", MB_OKCANCEL);
 			//ui.username_label->setText(username);
             this->show();
-            getConfigFile();
-            OnMonitor();
-            mycharts.display(ui,appManage);
+            //getConfigFile();
+            getConfigFromServer();
+
 		}
         else if (resultCode == 2)
         {
@@ -218,6 +218,62 @@ void ProcessMonitor::replayFinished(QNetworkReply *reply)
                 MessageBox(NULL, L"计时数据上传失败", L"", MB_OK | MB_ICONERROR);
             }
         }
+    }
+    else if(reply == reply_getAppConfigInfo)
+    {
+        QString val;
+        val = reply->readAll();
+        qDebug() << "getConfigFromServer: "<<val;
+        QJsonParseError jsonError;
+        QJsonDocument document = QJsonDocument::fromJson(val.toUtf8(),&jsonError);
+        if (!document.isNull() && (jsonError.error == QJsonParseError::NoError))
+        {
+            if (document.isArray())
+            {
+                QJsonArray array = document.array();
+                int nSize = array.size();
+                for (int i = 0;i<nSize;i++)
+                {
+                    QJsonValue value = array.at(i);
+                    if (value.isObject())
+                    {
+                        int id;
+                        QString processname = "";
+                        QString disName = "";
+                        QJsonObject object = value.toObject();
+                        if (object.contains("name"))
+                        {
+                            QJsonValue va = object.value("name");
+                            //qDebug()<<va.toString();
+                            disName = va.toString();
+                        }
+                        if (object.contains("processName"))
+                        {
+                            QJsonValue va = object.value("processName");
+                           //qDebug() << va.toString();
+                            processname = va.toString();
+                        }
+                        if (object.contains("id"))
+                        {
+                            QJsonValue va = object.value("id");
+                            //qDebug()<<va.toInt();
+                            id = va.toInt();
+                        }
+                        if (processname != "")
+                        {
+                            softs[id] = processname;
+                            softsName[id] = disName;
+                        }
+                    }
+                }
+            }
+        }
+
+        //添加被监控app信息
+        OnMonitor();
+        //绘制图表
+        mycharts.display(ui,appManage);
+
     }
 }
 
@@ -297,8 +353,9 @@ void ProcessMonitor::OnMonitor()
 	//MessageBox(NULL,L"MONITOR",L"",MB_OK);
 	for (int i = 0;i < ql.length()-1;i++)
 	{
-		appManage->addApp(softs[ql[i]],softsName[ql[i]]);
-        //qDebug()<<"OnMonitor: "<<softs[ql[i]]<<" : "<<softsName[ql[i]];
+        int id = ql[i].toInt();
+        appManage->addApp(softs[id],softsName[id]);
+        qDebug()<<"OnMonitor: "<<softs[id]<<" : "<<softsName[id];
 	}
 }
 void ProcessMonitor::timerEvent(QTimerEvent *event)
@@ -394,9 +451,12 @@ void ProcessMonitor::OnTest()
 	//HWND hWnd = FindWindowW(NULL,L"a.txt - 记事本");
 	//PostMessage(hWnd, 0X0010, 0, 0);
 	
-     mycharts.display(ui,appManage);
+    mycharts.display(ui,appManage);
+
+    //getConfigFromServer();
 
 
+    //OnMonitor();
 
 }
 
@@ -566,7 +626,7 @@ void ProcessMonitor::getConfigFile()
 						QJsonValue value = array.at(i);
 						if (value.isObject())
 						{	
-							QString id = "";
+                            int id;
 							QString processname = "";
 							QString disName = "";
 							QJsonObject object = value.toObject();
@@ -585,8 +645,8 @@ void ProcessMonitor::getConfigFile()
 							if (object.contains("id"))
 							{
 								QJsonValue va = object.value("id");
-                                //qDebug()<<va.toString();
-								id = va.toString();
+                                //qDebug()<<va.toInt();
+                                id = va.toInt();
 							}
 							if (processname != "")
 							{
@@ -601,6 +661,17 @@ void ProcessMonitor::getConfigFile()
 		}
 	}
 }
+
+void ProcessMonitor::getConfigFromServer()
+{
+    QUrl url("http://127.0.0.1:8080/getAppConfigInfo");
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/json"));
+    request.setRawHeader("Authorization", "Bearer 49152bfddae0c5b5d492d3d9871f8c11");
+    reply_getAppConfigInfo = manager->get(request);
+    qDebug()<<"send over";
+}
+
 
 void ProcessMonitor::OnLogOut()
 {

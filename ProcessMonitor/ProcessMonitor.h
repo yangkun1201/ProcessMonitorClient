@@ -39,6 +39,7 @@ public:
 	QString get_window_class(HWND hwnd);
 	void getDeskTopAppNames();
 	void getConfigFile();
+    void getConfigFromServer();
     void OnLogin(int ret,QString account,QString password);
     void askQuestion();
 	static int step;
@@ -69,8 +70,8 @@ private:
 	QTcpSocket *socket;
 	bool login_success;
 	QStringList ql;
-	map<QString,QString> softs;
-	map<QString, QString> softsName;
+    map<int,QString> softs;
+    map<int, QString> softsName;
 	QString account;
 	QString phone;
 	QString verificationCode;
@@ -80,4 +81,5 @@ private:
 	QNetworkReply* reply_verification;
 	QNetworkReply* reply_login;
     QNetworkReply* reply_uploadTimeInfo;
+    QNetworkReply* reply_getAppConfigInfo;
 };
