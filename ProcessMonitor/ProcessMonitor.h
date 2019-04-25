@@ -23,6 +23,7 @@
 #include <QtCharts>
 #include "MyCharts.h"
 #include "jobinfo.h"
+#include "facedetection.h"
 QT_CHARTS_USE_NAMESPACE
 
 using namespace std;

@@ -451,12 +451,17 @@ void ProcessMonitor::OnTest()
 	//HWND hWnd = FindWindowW(NULL,L"a.txt - 记事本");
 	//PostMessage(hWnd, 0X0010, 0, 0);
 	
-    mycharts.display(ui,appManage);
+    //刷新界面
+    //mycharts.display(ui,appManage);
 
     //getConfigFromServer();
 
 
     //OnMonitor();
+
+    FaceDetection faceDection;
+    faceDection.openFaceDlg();
+
 
 }
 

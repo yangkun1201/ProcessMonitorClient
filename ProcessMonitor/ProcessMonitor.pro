@@ -10,8 +10,8 @@ QT += core network gui widgets
 CONFIG += debug
 DEFINES += WIN64 QT_DLL QT_WIDGETS_LIB QT_NETWORK_LIB
 INCLUDEPATH += ./GeneratedFiles \
-    . \
-    ./GeneratedFiles/$(ConfigurationName)
+    ./GeneratedFiles/$(ConfigurationName) \
+    F:\opencv\opencv\build\include
 DEPENDPATH += ./GeneratedFiles
 MOC_DIR += ./GeneratedFiles/Debug
 OBJECTS_DIR += debug
@@ -19,7 +19,10 @@ UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 include(ProcessMonitor.pri)
 win32:RC_FILE = ProcessMonitor.rc
-LIBS += -luser32
+LIBS += -luser32 \
+        -lF:\opencv\opencv\build\x64\vc14\lib\opencv_world320d
+
+
 
 
 

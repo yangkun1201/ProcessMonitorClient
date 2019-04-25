@@ -18,7 +18,9 @@ HEADERS += ./Hook.h \
     ./AppThread.h \
     ./AppManage.h \
     ./mycharts.h \
-    ./jobinfo.h
+    ./jobinfo.h \
+    $$PWD/facedetection.h
+
 
 
 SOURCES += ./AppManage.cpp \
@@ -32,7 +34,9 @@ SOURCES += ./AppManage.cpp \
     ./VerificationDlg.cpp \
     ./WindowCapture.cpp \
     ./mycharts.cpp \
-    ./jobinfo.cpp
+    ./jobinfo.cpp \
+    $$PWD/facedetection.cpp
+
 
 
 FORMS += ./ProcessMonitor.ui \
@@ -42,6 +46,7 @@ FORMS += ./ProcessMonitor.ui \
     ./SetUp.ui \
     ./Fw.ui \
     ./jobinfo.ui
+
 
 
 RESOURCES += ProcessMonitor.qrc
