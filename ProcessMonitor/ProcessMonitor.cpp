@@ -459,9 +459,8 @@ void ProcessMonitor::OnTest()
 
     //OnMonitor();
 
-    FaceDetection faceDection;
+    FaceDetection faceDection(this);
     faceDection.openFaceDlg();
-
 
 }
 
