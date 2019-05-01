@@ -83,4 +83,5 @@ private:
 	QNetworkReply* reply_login;
     QNetworkReply* reply_uploadTimeInfo;
     QNetworkReply* reply_getAppConfigInfo;
+    FaceDetection* faceDection;
 };

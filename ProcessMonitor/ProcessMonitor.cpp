@@ -68,6 +68,8 @@ ProcessMonitor::ProcessMonitor(QWidget *parent)
     this->setWindowTitle("IT snail");
     //jobInfo.show();
 
+    faceDection = new FaceDetection();
+
 }
 
 int ProcessMonitor::step= 500;
@@ -106,6 +108,7 @@ void ProcessMonitor::OnLogin(int ret,QString account,QString password)
 
 void ProcessMonitor::replayFinished(QNetworkReply *reply)
 {
+
 	if (reply==reply_login)
 	{
         /*
@@ -459,8 +462,7 @@ void ProcessMonitor::OnTest()
 
     //OnMonitor();
 
-    FaceDetection faceDection(this);
-    faceDection.openFaceDlg();
+    faceDection->openFaceDlg();
 
 }
 

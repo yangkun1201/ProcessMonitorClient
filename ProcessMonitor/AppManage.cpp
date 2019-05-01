@@ -74,7 +74,7 @@ void AppManage::run()
 			RunningApps[appName] = true;
 			for (int i = 0;i<this->appNumber;i++)
 			{
-                if (AppTasks[i]->name == appName&&AppTasks[i]->isRunning == false&&cPid==pe32.th32ProcessID) //É¨ÃèÁÐ±íÖÐÒÑÔËÐÐµÄÓ¦ÓÃ
+                if (AppTasks[i]->name == appName&&AppTasks[i]->isRunning == false&&cPid==pe32.th32ProcessID) //æ‰«æåˆ—è¡¨ä¸­å·²è¿è¡Œçš„åº”ç”¨
 				{
 					AppTasks[i]->isRunning = true;
 					AppTasks[i]->appId = pe32.th32ProcessID;

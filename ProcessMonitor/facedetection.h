@@ -11,27 +11,26 @@
 using namespace std;
 using namespace cv;
 
-class FaceDetection
+class FaceDetection:QObject
 {
+    Q_OBJECT
 public:
-    FaceDetection(QObject* obj);
+    FaceDetection();
     void openFaceDlg();
-    string base64_encode(uchar const* bytes_to_encode, unsigned int in_len);
-    string base64_decode(std::string const& encoded_string);
-    string mat2str(const Mat& m);
-    Mat str2mat(const string& s);
-    bool is_base64( unsigned char c );
-    void StringReplace(string &strBase, string strSrc, string strDes);
-    void verificationFaceId(QString data);
-    QByteArray readFile(QString fileName);
+    void verificationFaceId();
+    QNetworkReply* reply_faceid;
+    int status; //0 未检测，1 正在检测， 2 验证成功， 3 验证失败
+    QString account;
+    QString name;
+public slots:
+    void replayFinished(QNetworkReply *reply);
 private:
-    String face_cascade_name = "F:\\opencv\\opencv\\build\\etc\\haarcascades\\haarcascade_frontalface_default.xml";
+    String face_cascade_name = "haarcascade_frontalface_default.xml";
     vector<Rect> faces;
-    const std::string base64_chars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    "abcdefghijklmnopqrstuvwxyz"
-    "0123456789+/";
-     QNetworkAccessManager * manager;
+    QNetworkAccessManager * manager;
+    void timerEvent(QTimerEvent *event);
+    int timerId;
+    int waitTime;
 
 };
 
