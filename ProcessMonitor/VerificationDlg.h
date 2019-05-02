@@ -10,10 +10,9 @@ class VerificationDlg : public QDialog
 public:
 	VerificationDlg(QWidget *parent = Q_NULLPTR);
 	~VerificationDlg();
-	QString verificationCode;
 private slots:
-	void OnOk();
-	void OnCancel();
+    void verByFace();
+    void verByQr();
 private:
 	Ui::VerificationDlg ui;
 };

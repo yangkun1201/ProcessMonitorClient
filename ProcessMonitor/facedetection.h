@@ -8,6 +8,7 @@
 #include <QUrl>
 #include <QUrlQuery>
 
+
 using namespace std;
 using namespace cv;
 
@@ -31,7 +32,7 @@ private:
     void timerEvent(QTimerEvent *event);
     int timerId;
     int waitTime;
-
+    QString baseIp;
 };
 
 #endif // FACEDETECTION_H

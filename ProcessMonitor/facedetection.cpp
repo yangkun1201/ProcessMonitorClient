@@ -5,14 +5,14 @@
 #include <qjsondocument.h>
 #include <qjsonarray.h>
 #include <QBuffer>
-
+#include "util.h"
 
 FaceDetection::FaceDetection()
 {
     manager = new QNetworkAccessManager(this);
     connect(manager,SIGNAL(finished(QNetworkReply*)),this,SLOT(replayFinished(QNetworkReply*)));
-
     waitTime = 0;
+    baseIp = Util::getInstance()->getBaseIp();
 
 }
 
@@ -70,7 +70,7 @@ void FaceDetection::openFaceDlg(){
 }
 
 void FaceDetection::verificationFaceId(){
-    QUrl url("http://127.0.0.1:8080/verificationFaceId");
+    QUrl url(baseIp+"/verificationFaceId");
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
    // QUrlQuery params;

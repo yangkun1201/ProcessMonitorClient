@@ -24,6 +24,8 @@
 #include "MyCharts.h"
 #include "jobinfo.h"
 #include "facedetection.h"
+#include "qrdlg.h"
+
 QT_CHARTS_USE_NAMESPACE
 
 using namespace std;
@@ -51,6 +53,7 @@ public:
 	Fw *fw;
     MyCharts mycharts;
     JobInfo jobInfo;
+
 public slots:
 	void OnMonitor();
 	void check_account();
@@ -66,7 +69,6 @@ public slots:
 	void OnLogOut();
 private:
 	Ui::ProcessMonitorClass ui;
-
 	AppManage *appManage;
 	QTcpSocket *socket;
 	bool login_success;
@@ -83,5 +85,5 @@ private:
 	QNetworkReply* reply_login;
     QNetworkReply* reply_uploadTimeInfo;
     QNetworkReply* reply_getAppConfigInfo;
-    FaceDetection* faceDection;
+    QString baseIp;
 };

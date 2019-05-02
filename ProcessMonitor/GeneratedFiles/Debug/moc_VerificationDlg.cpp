@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_VerificationDlg_t {
     QByteArrayData data[4];
-    char stringdata0[31];
+    char stringdata0[35];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,12 +32,12 @@ struct qt_meta_stringdata_VerificationDlg_t {
 static const qt_meta_stringdata_VerificationDlg_t qt_meta_stringdata_VerificationDlg = {
     {
 QT_MOC_LITERAL(0, 0, 15), // "VerificationDlg"
-QT_MOC_LITERAL(1, 16, 4), // "OnOk"
-QT_MOC_LITERAL(2, 21, 0), // ""
-QT_MOC_LITERAL(3, 22, 8) // "OnCancel"
+QT_MOC_LITERAL(1, 16, 9), // "verByFace"
+QT_MOC_LITERAL(2, 26, 0), // ""
+QT_MOC_LITERAL(3, 27, 7) // "verByQr"
 
     },
-    "VerificationDlg\0OnOk\0\0OnCancel"
+    "VerificationDlg\0verByFace\0\0verByQr"
 };
 #undef QT_MOC_LITERAL
 
@@ -71,8 +71,8 @@ void VerificationDlg::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         VerificationDlg *_t = static_cast<VerificationDlg *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->OnOk(); break;
-        case 1: _t->OnCancel(); break;
+        case 0: _t->verByFace(); break;
+        case 1: _t->verByQr(); break;
         default: ;
         }
     }

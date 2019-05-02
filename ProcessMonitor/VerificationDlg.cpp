@@ -1,25 +1,29 @@
 #include "VerificationDlg.h"
+#include "facedetection.h"
+#include "qrdlg.h"
 
 VerificationDlg::VerificationDlg(QWidget *parent)
 	: QDialog(parent)
 {
 	ui.setupUi(this);
-	verificationCode = "";
-	connect(ui.ok_btn, SIGNAL(clicked()), this, SLOT(OnOk()));
-	connect(ui.cancel_btn, SIGNAL(clicked()), this, SLOT(OnCancel()));
+    connect(ui.ver_face, SIGNAL(clicked()), this, SLOT(verByFace()));
+    connect(ui.ver_qr, SIGNAL(clicked()), this, SLOT(verByQr()));
 }
 
 VerificationDlg::~VerificationDlg()
 {
 }
 
-void VerificationDlg::OnOk()
+void VerificationDlg::verByFace()
 {
-	verificationCode = ui.verificationCode_Edit->text();
-	accept();
+    //人脸识别
+    FaceDetection faceDetection;
+    faceDetection.openFaceDlg();
 }
 
-void VerificationDlg::OnCancel()
+void VerificationDlg::verByQr()
 {
-	reject();
+    //二维码
+    QrDlg qrDlg;
+    qrDlg.exec();
 }

@@ -14,6 +14,7 @@
 #include <QDIR>
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
+#include "util.h"
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -68,8 +69,7 @@ ProcessMonitor::ProcessMonitor(QWidget *parent)
     this->setWindowTitle("IT snail");
     //jobInfo.show();
 
-    faceDection = new FaceDetection();
-
+    baseIp = Util::getInstance()->getBaseIp();
 }
 
 int ProcessMonitor::step= 500;
@@ -93,7 +93,7 @@ void ProcessMonitor::OnLogin(int ret,QString account,QString password)
 		QJsonDocument document;
 		document.setObject(obj);
 		QByteArray dataArray = document.toJson(QJsonDocument::Compact);
-        QUrl url("http://127.0.0.1:8080/login");
+        QUrl url(baseIp+"/login");
 		QNetworkRequest request(url);
         request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/json"));
         request.setRawHeader("Authorization", "Bearer 49152bfddae0c5b5d492d3d9871f8c11");
@@ -306,7 +306,7 @@ void ProcessMonitor::OnSendToHost()
 	QJsonDocument document;
 	document.setObject(obj);
 	QByteArray dataArray = document.toJson(QJsonDocument::Compact);
-    QUrl url("http://127.0.0.1:8080/uploadAppTimeInfo");
+    QUrl url(baseIp+"/uploadAppTimeInfo");
 	QNetworkRequest request(url);
 	request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/json"));
 	request.setRawHeader("Authorization", "Bearer 49152bfddae0c5b5d492d3d9871f8c11");
@@ -316,7 +316,8 @@ void ProcessMonitor::OnSendToHost()
 
 void ProcessMonitor::OnRegist()
 {
-	QDesktopServices::openUrl(QUrl("http://localhost:8086/monitor_2.0/register_2.html"));
+    //待修改
+    QDesktopServices::openUrl(QUrl(baseIp+"/monitor_2.0/register_2.html"));
 }
 
 void ProcessMonitor::check_account()//socket 已弃用
@@ -462,7 +463,16 @@ void ProcessMonitor::OnTest()
 
     //OnMonitor();
 
-    faceDection->openFaceDlg();
+    //人脸识别
+    //faceDection->openFaceDlg();
+
+    //二维码
+    //QrDlg qrDlg;
+    //qrDlg.exec();
+
+    //验证窗口
+    VerificationDlg verDlg;
+    verDlg.exec();
 
 }
 
@@ -497,6 +507,7 @@ void ProcessMonitor::getDeskTopAppNames()
 	qDebug() << get_window_title(pWnd);
 }
 
+//待修改
 void ProcessMonitor::sendMessage()
 {
 	//发送短信
@@ -511,29 +522,30 @@ void ProcessMonitor::sendMessage()
 	QJsonDocument document;
 	document.setObject(obj);
 	QByteArray dataArray = document.toJson(QJsonDocument::Compact);
-	QUrl url("http://127.0.0.1:8086/monitor_2.0/SmsDemo.php");
+    QUrl url(baseIp+"/monitor_2.0/SmsDemo.php");
 	QNetworkRequest request(url);
 	request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/json"));
 	request.setRawHeader("Authorization", "Bearer 49152bfddae0c5b5d492d3d9871f8c11");
 	reply_verification = manager->post(request, dataArray);
 
     appManage->stopAll();
-	VerificationDlg vdlg;
-	int ret = vdlg.exec();
-	if (ret == QDialog::Accepted)
-	{
-		if (vdlg.verificationCode == this->verificationCode)
-		{
-			MessageBox(NULL, L"验证码正确", L"", MB_OK | MB_ICONINFORMATION);
-			appManage->startAll();
-		}
-		else {
-			MessageBox(NULL, L"验证码错误", L"", MB_OK | MB_ICONERROR);
-		}
+//	VerificationDlg vdlg;
+//	int ret = vdlg.exec();
+//	if (ret == QDialog::Accepted)
+//	{
+//		if (vdlg.verificationCode == this->verificationCode)
+//		{
+//			MessageBox(NULL, L"验证码正确", L"", MB_OK | MB_ICONINFORMATION);
+//			appManage->startAll();
+//		}
+//		else {
+//			MessageBox(NULL, L"验证码错误", L"", MB_OK | MB_ICONERROR);
+//		}
 
-	}
+//	}
 }
 
+//待修改
 void ProcessMonitor::ShowOnBrowser()
 {
 	if (account == "")
@@ -541,10 +553,11 @@ void ProcessMonitor::ShowOnBrowser()
 		MessageBox(NULL, L"未登录", L"", MB_OK | MB_ICONERROR);
 		return;
 	}
-	QString url = "http://localhost:8086/monitor_2.0/chart.php?account="+this->account;
+    QString url = baseIp+"/monitor_2.0/chart.php?account="+this->account;
 	QDesktopServices::openUrl(QUrl(url));
 }
 
+//待修改
 void ProcessMonitor::OnSetup()
 {
 	//MessageBox(NULL, L"setup", L"", MB_OK | MB_ICONERROR);
@@ -561,7 +574,7 @@ void ProcessMonitor::OnSetup()
 		QJsonDocument document;
 		document.setObject(obj);
 		QByteArray dataArray = document.toJson(QJsonDocument::Compact);
-		QUrl url("http://127.0.0.1:8086/monitor_2.0/updateSofts.php");
+        QUrl url(baseIp+"/monitor_2.0/updateSofts.php");
 		QNetworkRequest request(url);
 		request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/json"));
 		request.setRawHeader("Authorization", "Bearer 49152bfddae0c5b5d492d3d9871f8c11");
@@ -670,7 +683,7 @@ void ProcessMonitor::getConfigFile()
 
 void ProcessMonitor::getConfigFromServer()
 {
-    QUrl url("http://127.0.0.1:8080/getAppConfigInfo");
+    QUrl url(baseIp+"/getAppConfigInfo");
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/json"));
     request.setRawHeader("Authorization", "Bearer 49152bfddae0c5b5d492d3d9871f8c11");
