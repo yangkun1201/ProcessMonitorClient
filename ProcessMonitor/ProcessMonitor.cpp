@@ -7,7 +7,6 @@
 #include <qnetwork.h>
 #include <qjsondocument.h>
 #include <qjsonarray.h>
-#include "VerificationDlg.h"
 #include "WindowCapture.h"
 #include <qscreen.h>
 #include <QPixmap>
@@ -52,7 +51,7 @@ ProcessMonitor::ProcessMonitor(QWidget *parent)
 	m_systray.setContextMenu(menu);
 	m_systray.show();
 
-	startTimer(100);
+    timerId = startTimer(100);
 	appManage->start();
 
 	login_success = false;
@@ -171,6 +170,7 @@ void ProcessMonitor::replayFinished(QNetworkReply *reply)
             this->show();
             //getConfigFile();
             getConfigFromServer();
+            Util::getInstance()->setAccount(this->account);
 
 		}
         else if (resultCode == 2)
@@ -377,7 +377,7 @@ void ProcessMonitor::timerEvent(QTimerEvent *event)
 
 
     //打印空闲时长
-    //qDebug()<<step;
+    qDebug()<<step;
     if (step > 500)
 	{
         step = 500;
@@ -388,8 +388,8 @@ void ProcessMonitor::timerEvent(QTimerEvent *event)
     if (step==-100&&account!="")
 	{
 		//MessageBox(NULL, L"ok", L"", MB_OKCANCEL);
-        int flag = rand()%2;
-        qDebug()<<"flag: "<<flag;
+        //int flag = rand()%2;
+        //qDebug()<<"flag: "<<flag;
         /*if(flag==0)
         {
             askQuestion();
@@ -397,7 +397,10 @@ void ProcessMonitor::timerEvent(QTimerEvent *event)
 
             sendMessage();
         }*/
-        askQuestion();
+        //askQuestion();
+
+        //验证窗口
+        openVerDlg();
     }
 //
 	d++;
@@ -696,4 +699,11 @@ void ProcessMonitor::OnLogOut()
 {
 	this->account = "";
 	this->appManage->appNumber = 0;
+}
+
+void ProcessMonitor::openVerDlg()
+{
+    VerificationDlg verDlg;
+    verDlg.exec();
+
 }

@@ -16,10 +16,13 @@ public:
         }
         return instance;
     }
+    void setAccount(QString account);
+    QString getAccount();
 
 private:
     Util();
     QString baseIp;
+    QString account;
     static Util* instance;
 };
 

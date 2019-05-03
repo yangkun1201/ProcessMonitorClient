@@ -23,6 +23,8 @@ public:
     int status; //0 未检测，1 正在检测， 2 验证成功， 3 验证失败
     QString account;
     QString name;
+    void closeWindow();
+    void showEvent(QShowEvent *);
 public slots:
     void replayFinished(QNetworkReply *reply);
 private:

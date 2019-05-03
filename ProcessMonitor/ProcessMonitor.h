@@ -25,6 +25,7 @@
 #include "jobinfo.h"
 #include "facedetection.h"
 #include "qrdlg.h"
+#include "VerificationDlg.h"
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -53,7 +54,6 @@ public:
 	Fw *fw;
     MyCharts mycharts;
     JobInfo jobInfo;
-
 public slots:
 	void OnMonitor();
 	void check_account();
@@ -67,6 +67,7 @@ public slots:
 	void ShowOnBrowser();
 	void OnSetup();
 	void OnLogOut();
+    void openVerDlg();
 private:
 	Ui::ProcessMonitorClass ui;
 	AppManage *appManage;
@@ -86,4 +87,5 @@ private:
     QNetworkReply* reply_uploadTimeInfo;
     QNetworkReply* reply_getAppConfigInfo;
     QString baseIp;
+    int timerId;
 };

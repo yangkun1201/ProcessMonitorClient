@@ -12,7 +12,6 @@
 #include <qjsondocument.h>
 #include <qjsonarray.h>
 #include <QBuffer>
-
 class QrDlg : public QDialog
 {
     Q_OBJECT
@@ -25,6 +24,9 @@ public:
     bool eventFilter(QObject *obj, QEvent *event);
     void pollingQrCodeStatus(QString uuid);
     void timerEvent(QTimerEvent *event);
+    QString account;
+    bool scanSuccess;
+    void showEvent(QShowEvent *);
 public slots:
     void replayFinished(QNetworkReply *reply);
 private:
@@ -34,8 +36,7 @@ private:
     QNetworkReply *reply_pollingResult;
     QString uuid;
     int timerId;
-    bool scanSuccess;
-    QString account;
+
     QString baseIp;
 };
 

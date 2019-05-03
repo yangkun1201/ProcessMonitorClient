@@ -1,6 +1,7 @@
 #include "qrdlg.h"
 #include "ui_qrdlg.h"
 #include "util.h"
+#include "Windows.h"
 
 QrDlg::QrDlg(QWidget *parent) :QDialog(parent)
 {
@@ -10,14 +11,20 @@ QrDlg::QrDlg(QWidget *parent) :QDialog(parent)
     connect(manager,SIGNAL(finished(QNetworkReply*)),this,SLOT(replayFinished(QNetworkReply*)));
     getQrCodeFromServer();
     ui.qrImg->installEventFilter(this);
-    uuid = "";
-    scanSuccess = false;
-    timerId = startTimer(300);//开启定时器
+
 }
 
 QrDlg::~QrDlg()
 {
+}
 
+void QrDlg::showEvent(QShowEvent *event)
+{
+    uuid = "";
+    scanSuccess = false;
+    timerId = startTimer(300);//开启定时器
+    account = "";
+    getQrCodeFromServer();
 }
 
 void QrDlg::getQrCodeFromServer()
@@ -67,6 +74,7 @@ void QrDlg::replayFinished(QNetworkReply *reply)
                     QJsonValue value = obj.value("account");
                     account = value.toString();
                 }
+
             }
 
         }

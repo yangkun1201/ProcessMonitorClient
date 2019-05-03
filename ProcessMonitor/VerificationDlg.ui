@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>177</height>
+    <height>222</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="ver_qr">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>100</y>
+     <x>220</x>
+     <y>50</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -29,14 +29,40 @@
   <widget class="QPushButton" name="ver_face">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>30</y>
+     <x>60</x>
+     <y>50</y>
      <width>91</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>人脸识别认证</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>63</x>
+     <y>10</y>
+     <width>251</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>检测到长时间未操作电脑，请选择以下方式认证</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="message">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>90</y>
+     <width>121</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

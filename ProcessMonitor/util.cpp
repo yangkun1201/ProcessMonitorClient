@@ -44,3 +44,13 @@ QString Util::getBaseIp()
     }
 }
 
+void Util::setAccount(QString account)
+{
+    this->account = account;
+}
+
+QString Util::getAccount()
+{
+    return this->account;
+}
+

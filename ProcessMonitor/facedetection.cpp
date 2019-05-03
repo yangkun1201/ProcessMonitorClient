@@ -11,9 +11,15 @@ FaceDetection::FaceDetection()
 {
     manager = new QNetworkAccessManager(this);
     connect(manager,SIGNAL(finished(QNetworkReply*)),this,SLOT(replayFinished(QNetworkReply*)));
-    waitTime = 0;
     baseIp = Util::getInstance()->getBaseIp();
+}
 
+void FaceDetection::showEvent(QShowEvent *event)
+{
+    account = "";
+    name = "";
+    status = 0;
+    waitTime = 0;
 }
 
 void FaceDetection::openFaceDlg(){
@@ -121,6 +127,7 @@ void FaceDetection::replayFinished(QNetworkReply *reply)
                     QJsonValue nameValue = obj.value("name");
                     name = nameValue.toString();
                 }
+
             }else{
                 status = 3;
             }
@@ -159,5 +166,9 @@ void FaceDetection::timerEvent(QTimerEvent *event){
 
 }
 
+void FaceDetection::closeWindow()
+{
+    cvDestroyAllWindows();
+}
 
 
