@@ -18,6 +18,7 @@ public:
     }
     void setAccount(QString account);
     QString getAccount();
+    QString readFile(QString filename);
 
 private:
     Util();

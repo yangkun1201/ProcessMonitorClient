@@ -99,8 +99,6 @@ public:
 
         menuBar->addAction(menu->menuAction());
         menuBar->addAction(menu_2->menuAction());
-        menu->addAction(regist_btn);
-        menu->addSeparator();
         menu->addAction(showOnBrowser);
         menu->addSeparator();
         menu->addAction(sendToHost_btn);
@@ -108,8 +106,6 @@ public:
         menu->addAction(logout_btn);
         menu->addSeparator();
         menu->addAction(action_exit);
-        menu_2->addAction(action_setup);
-        menu_2->addSeparator();
         menu_2->addAction(test_btn);
         menu_2->addSeparator();
 
@@ -123,7 +119,7 @@ public:
         ProcessMonitorClass->setWindowTitle(QApplication::translate("ProcessMonitorClass", "ProcessMonitor", nullptr));
         action_open->setText(QApplication::translate("ProcessMonitorClass", "\346\211\223\345\274\200", nullptr));
         action_exit->setText(QApplication::translate("ProcessMonitorClass", "\351\200\200\345\207\272", nullptr));
-        test_btn->setText(QApplication::translate("ProcessMonitorClass", "test", nullptr));
+        test_btn->setText(QApplication::translate("ProcessMonitorClass", "\345\210\267\346\226\260", nullptr));
         monitor->setText(QApplication::translate("ProcessMonitorClass", "\347\233\221\346\216\247", nullptr));
         regist_btn->setText(QApplication::translate("ProcessMonitorClass", "\346\263\250\345\206\214", nullptr));
         login_btn->setText(QApplication::translate("ProcessMonitorClass", "\347\231\273\345\275\225", nullptr));

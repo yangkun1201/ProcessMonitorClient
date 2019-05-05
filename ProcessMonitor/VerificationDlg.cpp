@@ -17,6 +17,11 @@ VerificationDlg::~VerificationDlg()
     delete qrDlg;
 }
 
+void VerificationDlg::showEvent(QShowEvent *)
+{
+    verSuccess = false;
+}
+
 void VerificationDlg::verByFace()
 {
     //人脸识别
@@ -25,6 +30,7 @@ void VerificationDlg::verByFace()
         message = "验证失败";
     }else if(faceDetection->account==Util::getInstance()->getAccount()){
         message = "验证成功\n账号:"+faceDetection->account+"\n"+"用户:"+faceDetection->name;
+        verSuccess = true;
     }else{
         message = "验证失败";
     }
@@ -40,6 +46,7 @@ void VerificationDlg::verByQr()
         message = "验证失败";
     }else if(qrDlg->account==Util::getInstance()->getAccount()){
         message = "验证成功\n账号:"+qrDlg->account;
+        verSuccess = true;
     }else{
        message = "验证失败";
     }

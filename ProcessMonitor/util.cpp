@@ -5,6 +5,7 @@
 #include <qjsondocument.h>
 #include <qjsonarray.h>
 #include "QDebug"
+#include <qtextcodec.h>
 
 Util* Util::instance = NULL;
 
@@ -21,7 +22,7 @@ QString Util::getBaseIp()
     }else{
         QString val;
         QFile file;
-        file.setFileName("../config/config.json");
+        file.setFileName("./config/config.json");
         file.open(QIODevice::ReadOnly | QIODevice::Text);
         val = file.readAll();
         file.close();
@@ -52,5 +53,20 @@ void Util::setAccount(QString account)
 QString Util::getAccount()
 {
     return this->account;
+}
+
+QString Util::readFile(QString filename)
+{
+    QFile file(filename);
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QByteArray bytes = file.readAll();
+        QTextCodec *codec = QTextCodec::codecForName("GBK");
+        if (codec)
+        {
+            return codec->toUnicode(bytes);
+        }
+    }
+    return " ";
 }
 

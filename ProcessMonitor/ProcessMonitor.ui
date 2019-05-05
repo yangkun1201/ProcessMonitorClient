@@ -34,8 +34,6 @@
     <property name="title">
      <string>菜单</string>
     </property>
-    <addaction name="regist_btn"/>
-    <addaction name="separator"/>
     <addaction name="showOnBrowser"/>
     <addaction name="separator"/>
     <addaction name="sendToHost_btn"/>
@@ -48,8 +46,6 @@
     <property name="title">
      <string>设置</string>
     </property>
-    <addaction name="action_setup"/>
-    <addaction name="separator"/>
     <addaction name="test_btn"/>
     <addaction name="separator"/>
    </widget>
@@ -68,7 +64,7 @@
   </action>
   <action name="test_btn">
    <property name="text">
-    <string>test</string>
+    <string>刷新</string>
    </property>
   </action>
   <action name="monitor">

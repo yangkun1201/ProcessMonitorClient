@@ -30,5 +30,5 @@ int LoginDlg::OnBtnCancel()
 }
 void LoginDlg::OnRegist()
 {
-    QDesktopServices::openUrl(QUrl("http://localhost:8086/monitor_2.0/register_2.html"));
+    QDesktopServices::openUrl(QUrl("http://39.108.95.162/registered/registered.html"));
 }

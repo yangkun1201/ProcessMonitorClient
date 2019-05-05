@@ -1,4 +1,5 @@
 #include "Fw.h"
+#include "util.h"
 
 Fw::Fw(QWidget *parent)
 	: QWidget(parent)
@@ -6,15 +7,17 @@ Fw::Fw(QWidget *parent)
 	ui.setupUi(this);
 	this->setWindowFlags(Qt::FramelessWindowHint);
 	this->setWindowFlags(Qt::Tool);
-	this->setWindowOpacity(0.8);
+    this->setWindowOpacity(0.9);
 	this->setGeometry(QRect(1000,60,120,60));
-	QBitmap bmp(this->size());
-	bmp.fill();
-	QPainter p(&bmp);
-	p.setPen(Qt::NoPen);
-	p.setBrush(Qt::black);
-	p.drawRoundedRect(bmp.rect(), 20, 20);
-	setMask(bmp);
+    QBitmap bmp(this->size());
+    bmp.fill();
+    QPainter p(&bmp);
+    p.setPen(Qt::black);
+    p.setBrush(Qt::black);
+    p.setBackground(QColor(255, 160, 90));
+    p.drawRoundedRect(bmp.rect(), 20, 20);
+    setMask(bmp);
+
 }
 
 Fw::~Fw()

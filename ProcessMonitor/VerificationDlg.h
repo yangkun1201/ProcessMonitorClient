@@ -14,6 +14,8 @@ public:
 	VerificationDlg(QWidget *parent = Q_NULLPTR);
 	~VerificationDlg();
     void timerEvent(QTimerEvent *event);
+    bool verSuccess;
+    void showEvent(QShowEvent *);
 private slots:
     void verByFace();
     void verByQr();

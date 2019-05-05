@@ -459,7 +459,7 @@ void ProcessMonitor::OnTest()
 	//PostMessage(hWnd, 0X0010, 0, 0);
 	
     //刷新界面
-    //mycharts.display(ui,appManage);
+    mycharts.display(ui,appManage);
 
     //getConfigFromServer();
 
@@ -474,8 +474,8 @@ void ProcessMonitor::OnTest()
     //qrDlg.exec();
 
     //验证窗口
-    VerificationDlg verDlg;
-    verDlg.exec();
+    //VerificationDlg verDlg;
+    //verDlg.exec();
 
 }
 
@@ -548,7 +548,7 @@ void ProcessMonitor::sendMessage()
 //	}
 }
 
-//待修改
+
 void ProcessMonitor::ShowOnBrowser()
 {
 	if (account == "")
@@ -556,11 +556,11 @@ void ProcessMonitor::ShowOnBrowser()
 		MessageBox(NULL, L"未登录", L"", MB_OK | MB_ICONERROR);
 		return;
 	}
-    QString url = baseIp+"/monitor_2.0/chart.php?account="+this->account;
+    QString url = "http://39.108.95.162/index.html?account="+this->account;
 	QDesktopServices::openUrl(QUrl(url));
 }
 
-//待修改
+//已弃用
 void ProcessMonitor::OnSetup()
 {
 	//MessageBox(NULL, L"setup", L"", MB_OK | MB_ICONERROR);
@@ -698,12 +698,20 @@ void ProcessMonitor::getConfigFromServer()
 void ProcessMonitor::OnLogOut()
 {
 	this->account = "";
-	this->appManage->appNumber = 0;
+    this->appManage->appNumber = 0;
+    LoginDlg dlg;
+    int ret = dlg.exec();
+    OnLogin(ret,dlg.account,dlg.password);
 }
 
 void ProcessMonitor::openVerDlg()
 {
+    appManage->stopAll();
     VerificationDlg verDlg;
     verDlg.exec();
+    if(verDlg.verSuccess)
+    {
+        appManage->startAll();
+    }
 
 }
