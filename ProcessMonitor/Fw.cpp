@@ -8,7 +8,7 @@ Fw::Fw(QWidget *parent)
 	this->setWindowFlags(Qt::FramelessWindowHint);
 	this->setWindowFlags(Qt::Tool);
     this->setWindowOpacity(0.9);
-	this->setGeometry(QRect(1000,60,120,60));
+    this->setGeometry(QRect(1000,60,150,80));
     QBitmap bmp(this->size());
     bmp.fill();
     QPainter p(&bmp);
@@ -36,10 +36,12 @@ void Fw::mouseMoveEvent(QMouseEvent *event)
 	this->move(event->globalPos() + relativePos);
 }
 
-void Fw::setInformation(QString name, QString time)
+void Fw::setInformation(QString name, QString time,QString active)
 {
 	this->name = name;
 	this->time = time;
+    this->active = active;
 	ui.label_name->setText(name);
 	ui.label_time->setText(time);
+    ui.label_active->setText(active);
 }

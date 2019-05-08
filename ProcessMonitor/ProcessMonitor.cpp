@@ -370,7 +370,9 @@ void ProcessMonitor::timerEvent(QTimerEvent *event)
 		{
 			QString n;
 			n = n.sprintf("%d", appManage->AppTasks[i]->liveTime);
-			fw->setInformation(appManage->AppTasks[i]->displayName,n);
+            QString n1;
+            n1 = n1.sprintf("%d",step);
+            fw->setInformation(appManage->AppTasks[i]->displayName,n,n1);
 		}
 		///qDebug()<< appManage->AppTasks[i]->name +":" <<(int)appManage->AppTasks[i]->appId;
 	}
@@ -385,7 +387,7 @@ void ProcessMonitor::timerEvent(QTimerEvent *event)
     //长时间未操作，提问或短信验证
     step--;
 
-    if (step==-100&&account!="")
+    if (step==verTime&&account!="")
 	{
 		//MessageBox(NULL, L"ok", L"", MB_OKCANCEL);
         //int flag = rand()%2;

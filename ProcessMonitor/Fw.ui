@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>226</width>
-    <height>72</height>
+    <height>79</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -51,8 +51,34 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>11</x>
-     <y>41</y>
+     <x>10</x>
+     <y>50</y>
+     <width>41</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>活动值:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_time">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>30</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
      <width>31</width>
      <height>16</height>
     </rect>
@@ -61,12 +87,12 @@
     <string>用时:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_time">
+  <widget class="QLabel" name="label_active">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>40</y>
-     <width>61</width>
+     <x>60</x>
+     <y>50</y>
+     <width>91</width>
      <height>16</height>
     </rect>
    </property>

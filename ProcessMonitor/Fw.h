@@ -16,9 +16,10 @@ public:
 	void mousePressEvent(QMouseEvent *event);
 	void mouseMoveEvent(QMouseEvent *event);
 	QPoint relativePos;
-	void setInformation(QString name,QString time);
+    void setInformation(QString name,QString time,QString active);
 private:
 	Ui::Fw ui;
 	QString name;
 	QString time;
+    QString active;
 };

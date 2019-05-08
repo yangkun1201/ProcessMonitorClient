@@ -88,4 +88,5 @@ private:
     QNetworkReply* reply_getAppConfigInfo;
     QString baseIp;
     int timerId;
+    int verTime = 0;
 };
