@@ -89,4 +89,5 @@ private:
     QString baseIp;
     int timerId;
     int verTime = 0;
+    static int verMaxTime;
 };

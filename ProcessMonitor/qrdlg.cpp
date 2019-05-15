@@ -9,7 +9,7 @@ QrDlg::QrDlg(QWidget *parent) :QDialog(parent)
     baseIp = Util::getInstance()->getBaseIp();
     manager = new QNetworkAccessManager(this);
     connect(manager,SIGNAL(finished(QNetworkReply*)),this,SLOT(replayFinished(QNetworkReply*)));
-    getQrCodeFromServer();
+    //getQrCodeFromServer();
     ui.qrImg->installEventFilter(this);
 
 }
@@ -22,7 +22,7 @@ void QrDlg::showEvent(QShowEvent *event)
 {
     uuid = "";
     scanSuccess = false;
-    timerId = startTimer(300);//开启定时器
+    timerId = startTimer(500);//开启定时器
     account = "";
     getQrCodeFromServer();
 }
@@ -37,6 +37,7 @@ void QrDlg::getQrCodeFromServer()
 
 void QrDlg::replayFinished(QNetworkReply *reply)
 {
+    //qDebug()<<reply->readAll();
     if(reply == reply_qrCode){
         QByteArray result = reply->readAll();
         QJsonParseError jsonError;
@@ -110,6 +111,7 @@ bool QrDlg::eventFilter(QObject *obj, QEvent *event)
 
 void QrDlg::pollingQrCodeStatus(QString uuid)
 {
+    //qDebug()<<"polling";
     QUrl url(baseIp+"/queryQrCodeScanStatus?uuid="+uuid);
     QNetworkRequest request(url);
     reply_pollingResult = manager->get(request);

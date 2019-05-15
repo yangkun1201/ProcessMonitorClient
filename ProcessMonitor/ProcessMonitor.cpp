@@ -70,8 +70,9 @@ ProcessMonitor::ProcessMonitor(QWidget *parent)
 
     baseIp = Util::getInstance()->getBaseIp();
 }
+int ProcessMonitor::verMaxTime = 100;
+int ProcessMonitor::step= ProcessMonitor::verMaxTime;
 
-int ProcessMonitor::step= 500;
 
 void ProcessMonitor::OnLogin(int ret,QString account,QString password)
 {
@@ -380,12 +381,19 @@ void ProcessMonitor::timerEvent(QTimerEvent *event)
 
     //打印空闲时长
     qDebug()<<step;
-    if (step > 500)
+    if (step > ProcessMonitor::verMaxTime)
 	{
-        step = 500;
+        step = ProcessMonitor::verMaxTime;
 	}
+    if (step <-10 )
+    {
+        step = -10;
+    }
     //长时间未操作，提问或短信验证
-    step--;
+    if(account != ""){
+        step--;
+    }
+
 
     if (step==verTime&&account!="")
 	{

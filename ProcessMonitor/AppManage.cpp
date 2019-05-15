@@ -85,6 +85,9 @@ void AppManage::run()
 		CloseHandle(hProcessSnap);
 		for (int i = 0;i < this->appNumber;i++)
 		{
+            //满足以下两个条件之一停止计时，
+            //1. 任务管理器中不存在该任务
+            //2. 该任务失去鼠标焦点
             if (!RunningApps[AppTasks[i]->name]||cPid!=AppTasks[i]->appId)
 			{
 				AppTasks[i]->isRunning = false;
